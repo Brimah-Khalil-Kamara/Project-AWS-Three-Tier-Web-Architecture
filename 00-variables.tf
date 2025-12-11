@@ -30,3 +30,8 @@ variable "env_prefix" {
   type        = string
   description = "Environment prefix to include in subnet and VPC names"
 }
+
+variable "my_public_ip" {
+  description = "Your public IP address for access"
+  type        = string
+}
