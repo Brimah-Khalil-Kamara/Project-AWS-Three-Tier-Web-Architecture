@@ -21,6 +21,7 @@ resource "aws_subnet" "tiered" {
   map_public_ip_on_launch = each.value.map_public
 
   tags = {
-    Name = "${each.value.name}-Subnet-AZ-${var.env_prefix}-${each.value.az_index + 1}"
+    Name = "${var.env_prefix}-${each.value.name}-Subnet-AZ-${each.value.az_index + 1}"
+
   }
 }
