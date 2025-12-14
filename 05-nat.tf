@@ -2,11 +2,9 @@
 # NAT Gateway
 # -----------------------
 
+# Create Elastic IPs for NAT Gateways (one per AZ)
 resource "aws_eip" "nat" {
-  for_each = {
-    az1 = "AZ-1"
-    az2 = "AZ-2"
-  }
+  for_each = { for k, s in var.public_subnets : s.az => k }
 
   domain = "vpc"
 
@@ -15,18 +13,14 @@ resource "aws_eip" "nat" {
   }
 }
 
-
+# Create NAT Gateway in each public subnet (one per AZ)
 resource "aws_nat_gateway" "nat" {
-  for_each = {
-    az1 = aws_subnet.tiered["Public-Web-AZ-1"].id
-    az2 = aws_subnet.tiered["Public-Web-AZ-2"].id
-  }
+  for_each = { for k, s in var.public_subnets : s.az => k }
 
   allocation_id = aws_eip.nat[each.key].id
-  subnet_id     = each.value
+  subnet_id     = aws_subnet.public[each.value].id
 
   tags = {
-    Name = "NAT-GW-${upper(each.key)}"
+    Name = "NAT-GW-${each.key}"
   }
 }
-
