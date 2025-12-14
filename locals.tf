@@ -1,3 +1,5 @@
+/*
+
 locals {
   subnet_tiers = [
     { name = "Public-Web", cidr_az1 = "172.20.1.0/24", cidr_az2 = "172.20.2.0/24", map_public = true },
@@ -13,3 +15,4 @@ locals {
     ]
   ])
 }
+*/
