@@ -35,3 +35,19 @@ variable "my_public_ip" {
   description = "Your public IP address for access"
   type        = string
 }
+
+
+
+variable "public_subnets" {
+  type = map(object({
+    cidr_block = string
+    az         = string
+  }))
+}
+
+variable "private_subnets" {
+  type = map(object({
+    cidr_block = string
+    az         = string
+  }))
+}
