@@ -20,11 +20,13 @@ variable "vpc_cidr_block" {
   description = "VPC CIDR block"
 }
 
-
+/*
 variable "availability_zones" {
   type        = list(string)
   description = "AZs to deploy subnets in (2 AZs)"
 }
+*/
+
 
 variable "env_prefix" {
   type        = string
