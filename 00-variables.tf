@@ -20,6 +20,10 @@ variable "vpc_cidr_block" {
   description = "VPC CIDR block"
 }
 
+variable "ami_value" {
+  description = "Value for the ami"
+}
+
 /*
 variable "availability_zones" {
   type        = list(string)
