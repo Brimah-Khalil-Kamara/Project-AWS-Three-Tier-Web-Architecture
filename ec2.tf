@@ -2,7 +2,7 @@
 
 
 resource "aws_instance" "architecture_instance" {
-  ami           = "ami-099400d52583dd8c4"  # Replace with a valid AMI ID
+  ami           = var.ami_value  # Replace with a valid AMI ID
   instance_type = var.instance_type
 
   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
