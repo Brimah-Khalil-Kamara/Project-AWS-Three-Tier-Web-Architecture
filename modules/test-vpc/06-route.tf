@@ -3,7 +3,7 @@
 # -----------------------
 
 resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.architecture_vpc.id
+  vpc_id = aws_vpc.this.id
 
   tags = {
     Name = "${var.env_prefix}-Public-Web-rt"
@@ -30,7 +30,7 @@ resource "aws_route_table_association" "public_assoc" {
 resource "aws_route_table" "private_app" {
   for_each = var.private_subnets
 
-  vpc_id = aws_vpc.architecture_vpc.id
+  vpc_id = aws_vpc.this.id
 
   route {
     cidr_block     = "0.0.0.0/0"

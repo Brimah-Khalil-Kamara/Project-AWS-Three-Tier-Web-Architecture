@@ -1,7 +1,7 @@
 resource "aws_subnet" "public" {
   for_each = var.public_subnets
 
-  vpc_id            = aws_vpc.architecture_vpc.id
+  vpc_id            = aws_vpc.this.id
   cidr_block        = each.value.cidr_block
   availability_zone = each.value.az
 
@@ -14,7 +14,7 @@ resource "aws_subnet" "public" {
 resource "aws_subnet" "private" {
   for_each = var.private_subnets
 
-  vpc_id            = aws_vpc.architecture_vpc.id
+  vpc_id            = aws_vpc.this.id
   cidr_block        = each.value.cidr_block
   availability_zone = each.value.az
 

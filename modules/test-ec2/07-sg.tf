@@ -13,7 +13,7 @@
 resource "aws_security_group" "internet_facing_lb" {
   name        = "internet-facing-lb-sg"
   description = "External load balancer security group"
-  vpc_id      = aws_vpc.architecture_vpc.id
+  vpc_id      = var.vpc_id   # <-- use the input variable, not the module resource
 
   # Inbound rules
   ingress {
@@ -44,7 +44,7 @@ resource "aws_security_group" "internet_facing_lb" {
 resource "aws_security_group" "web_tier" {
   name        = "WebTierSG"
   description = "SG for the Web Tier"
-  vpc_id      = aws_vpc.architecture_vpc.id
+  vpc_id      = var.vpc_id
 
   # Allow HTTP from the internet-facing load balancer
   ingress {
@@ -85,7 +85,7 @@ resource "aws_security_group" "web_tier" {
 resource "aws_security_group" "internal_lb" {
   name        = "Internal-lb-sg"
   description = "SG for the internal load balancer"
-  vpc_id      = aws_vpc.architecture_vpc.id
+  vpc_id      = var.vpc_id   # <-- use the input variable, not the module resource
 
   # Allow HTTP from the Web Tier SG
   ingress {
@@ -117,7 +117,7 @@ resource "aws_security_group" "internal_lb" {
 resource "aws_security_group" "private_app" {
   name        = "PrivateInstanceSG"
   description = "SG for our private app tier sg"
-  vpc_id      = aws_vpc.architecture_vpc.id
+  vpc_id      = var.vpc_id
 
   # Allow TCP 4000 from Internal LB
   ingress {
@@ -158,7 +158,8 @@ resource "aws_security_group" "private_app" {
 resource "aws_security_group" "db" {
   name        = "DBSG"
   description = "SG for our databases"
-  vpc_id      = aws_vpc.architecture_vpc.id
+  vpc_id      = var.vpc_id   # <-- use the input variable, not the module resource
+
 
   # Allow MySQL/Aurora (3306) from Private App tier SG
   ingress {
