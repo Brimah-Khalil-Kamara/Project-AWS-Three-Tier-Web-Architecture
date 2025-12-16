@@ -1,7 +1,4 @@
-#variable region {}
-#variable instance_type {}
-#variable env_prefix {}
-#variable subnet_cidr_block {}
+
 
 variable "region" {
   type        = string
@@ -24,12 +21,7 @@ variable "ami_value" {
   description = "Value for the ami"
 }
 
-/*
-variable "availability_zones" {
-  type        = list(string)
-  description = "AZs to deploy subnets in (2 AZs)"
-}
-*/
+
 
 
 variable "env_prefix" {
