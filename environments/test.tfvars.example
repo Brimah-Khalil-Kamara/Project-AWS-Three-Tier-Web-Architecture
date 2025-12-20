@@ -1,3 +1,10 @@
+# -----------------
+# TEST ENVIRONMENT (EXAMPLE)
+# -----------------
+# Copy this file to test.tfvars and update values as needed
+# cp environments/test.tfvars.example environments/test.tfvars
+
+
 region = "eu-west-2"
 
 instance_type = "t3.micro"
@@ -6,16 +13,27 @@ env_prefix = "test-3tier"
 
 vpc_cidr_block = "172.20.0.0/16"
 
+# Replace with your own public IP (must include /32)
 my_public_ip = "X.X.X.X/32"
 
+# Replace with a valid AMI for eu-west-2
 ami_value = "ami-xxxxxxxxxxxxxxxxx"
 
+
 public_subnets = {
-  web-a = { cidr_block = "172.20.1.0/24", az = "eu-west-2a" }
-  web-b = { cidr_block = "172.20.2.0/24", az = "eu-west-2b" }
+  "Web-Subnet-AZ-1" = { cidr_block = "172.20.1.0/24", az = "eu-west-2a" }
+  "Web-Subnet-AZ-2" = { cidr_block = "172.20.2.0/24", az = "eu-west-2b" }
 }
 
 private_subnets = {
-  app-a = { cidr_block = "172.20.11.0/24", az = "eu-west-2a" }
-  app-b = { cidr_block = "172.20.12.0/24", az = "eu-west-2b" }
+  "App-Subnet-AZ-1" = { cidr_block = "172.20.11.0/24", az = "eu-west-2a" }
+  "App-Subnet-AZ-2" = { cidr_block = "172.20.12.0/24", az = "eu-west-2b" }
+  "DB-Subnet-AZ-1"  = { cidr_block = "172.20.21.0/24", az = "eu-west-2a" }
+  "DB-Subnet-AZ-2"  = { cidr_block = "172.20.22.0/24", az = "eu-west-2b" }
 }
+
+
+# --------------------------------------------
+# Usage
+# --------------------------------------------
+# terraform apply -var-file=environments/test.tfvars
